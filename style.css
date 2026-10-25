@@ -1,0 +1,356 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-study: #4a7c9e;
+  --color-work: #5a6b7d;
+  --color-sport: #3d7a5a;
+  --color-creativity: #8a6d9e;
+  --color-freetime: #c47a3e;
+  --color-meal: #b0b0b0;
+  --color-health: #a04a4a;
+  --color-rest: #9a9a9a;
+  --hour-height: 60px;
+  --bg-page: #f5f5f7;
+}
+
+.cat-study { background: var(--color-study); }
+.cat-work { background: var(--color-work); }
+.cat-sport { background: var(--color-sport); }
+.cat-creativity { background: var(--color-creativity); }
+.cat-freetime { background: var(--color-freetime); }
+.cat-meal { background: var(--color-meal); }
+.cat-health { background: var(--color-health); }
+.cat-rest { background: var(--color-rest); }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  background: var(--bg-page);
+}
+
+#grid{
+    display: grid;
+    grid-template-columns: 60px repeat(7, 1fr);
+    gap: 8px;
+}
+
+.day-column{
+    background-color: white;
+    border-radius: 12px;
+    padding: 8px;
+    min-height: 1100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.day-column h2{
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #666;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.day-body{
+    position: relative;
+    flex: 1;
+    background-image: repeating-linear-gradient(to bottom, #d0d0d0 0, #d0d0d0 1px, transparent 1px, transparent var(--hour-height));
+}
+
+.block{
+    position: absolute;
+    left: 0.3px;
+    right: 0.3px;
+    border-radius: 6px;
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 6px;
+}
+
+.time-column{
+    display: flex; 
+    align-items: flex-start;
+    flex-direction: column;
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.time-header{
+    height: 20px;
+    margin-bottom: 8px;
+}
+
+.time-column span{
+    font-size: 0.7rem;
+    color: #999;
+    font-variant-numeric: tabular-nums;
+    height: var(--hour-height);
+}
+
+header {
+  padding: 16px;
+}
+
+#add-btn {
+  background: #1d1d1f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#form-overlay[hidden] {
+  display: none;
+}
+
+#form-panel {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#form-panel h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+#form-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+#form-panel input,
+#form-panel select {
+  padding: 8px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.form-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+#cancel-btn {
+  background: #eee;
+}
+
+#save-btn {
+  background: #1d1d1f;
+  color: white;
+}
+
+#duplicate-btn {
+  background: #4a7c9e;
+  color: white;
+  margin-right: 8px;
+}
+
+#delete-btn {
+  background: #a04a4a;
+  color: white;
+  margin-right: auto;
+}
+
+.grid-wrapper {
+  overflow: auto;
+  height: calc(100vh - 70px);
+}
+
+.time-column {
+  position: sticky;
+  left: 0;
+  background: var(--bg-page); 
+  z-index: 10;
+  height: 100%;
+}
+
+.day-column h2 {
+  position: sticky;
+  top: 0;
+  background: white; 
+  z-index: 5;
+  padding: 8px 0;
+  margin-bottom: 0;
+}
+
+#day-selector {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #day-selector {
+    display: flex;
+    gap: 8px;
+    padding: 0 16px 16px 16px;
+    overflow-x: auto;
+  }
+
+  .day-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #d0d0d0;
+    background: white;
+    font-size: 0.8rem;
+  }
+  
+  .day-btn.active {
+    background: #1d1d1f;
+    color: white;
+    border-color: #1d1d1f;
+  }
+
+  #grid {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 0;
+  }
+
+  .time-column {
+    width: 50px; 
+    flex-shrink: 0;
+  }
+
+  .day-column {
+    display: none;
+    width: calc(100% - 50px);
+    flex-shrink: 0;
+    min-height: auto;
+  }
+
+  .day-column.active {
+    display: flex;
+  }
+}
+
+#grid-start-select {
+  margin-left: auto;
+}
+
+.current-time-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #e63946; /* Rosso acceso */
+  z-index: 20; /* Sopra i blocchi, sotto le intestazioni */
+  pointer-events: none; /* Non blocca i click sui blocchi */
+}
+
+.current-time-line::before {
+  content: '';
+  position: absolute;
+  left: -4px; /* Pallino sulla sinistra */
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  background-color: #e63946;
+  border-radius: 50%;
+}
+
+.day-column.is-today {
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.day-column.is-today h2 {
+  color: #1d1d1f;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .day-column.is-today {
+    border: none;
+    box-shadow: none;
+  }
+}
+
+#settings-btn {
+  background: #eee;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+#settings-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+#settings-overlay[hidden] {
+  display: none;
+}
+
+#settings-panel {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#settings-panel h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+#settings-panel label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+#settings-panel input[type="color"] {
+  width: 40px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  cursor: pointer;
+}

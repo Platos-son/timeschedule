@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My TimeSchedule</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <main>
+        <header>
+            <button id="add-btn">+ Aggiungi</button>
+            <select id="grid-start-select">
+                <option value="5">05:00</option>
+                <option value="6">06:00</option>
+                <option value="7" selected>07:00</option>
+                <option value="8">08:00</option>
+                <option value="9">09:00</option>
+            </select>
+            <button id="settings-btn" style="margin-left: 8px;">Colori</button>
+        </header>
+        <div id="day-selector">
+            <button class="day-btn" data-day="monday">Lun</button>
+            <button class="day-btn" data-day="tuesday">Mar</button>
+            <button class="day-btn" data-day="wednesday">Mer</button>
+            <button class="day-btn" data-day="thursday">Gio</button>
+            <button class="day-btn" data-day="friday">Ven</button>
+            <button class="day-btn" data-day="saturday">Sab</button>
+            <button class="day-btn" data-day="sunday">Dom</button>
+        </div>
+        <div class="grid-wrapper">
+        <div id="grid">
+            <div class="time-column">
+                <div class="time-header"></div>
+            </div>
+            <section class="day-column" data-day="monday">
+                <h2>Lunedì</h2>
+                <div class="day-body"></div>
+            </section>
+            <section class="day-column" data-day="tuesday">
+                <h2>Martedì</h2>
+                <div class="day-body"></div>
+            </section>
+            <section class="day-column" data-day="wednesday">
+                <h2>Mercoledì</h2>
+                <div class="day-body"></div>
+            </section>
+            <section class="day-column" data-day="thursday">
+                <h2>Giovedì</h2>
+                <div class="day-body"></div>
+            </section>
+            <section class="day-column" data-day="friday">
+                <h2>Venerdì</h2>
+                <div class="day-body"></div>
+            </section>
+            <section class="day-column" data-day="saturday">
+                <h2>Sabato</h2>
+                <div class="day-body"></div>
+            </section>
+            <section class="day-column" data-day="sunday">
+                <h2>Domenica</h2>
+                <div class="day-body"></div>
+            </section>
+        </div>
+        </div>
+    </main>
+    <div id="form-overlay" hidden>
+        <div id="form-panel">
+            <h2>Nuova attività</h2>
+            <label>Nome <input type="text" id="input-name"></label>
+            <label>Giorno
+              <select id="input-day">
+                <option value="monday">Lunedì</option>
+                <option value="tuesday">Martedì</option>
+                <option value="wednesday">Mercoledì</option>
+                <option value="thursday">Giovedì</option>
+                <option value="friday">Venerdì</option>
+                <option value="saturday">Sabato</option>
+                <option value="sunday">Domenica</option>
+              </select>
+            </label>
+            <label>Inizio <input type="time" id="input-start"></label>
+            <label>Fine <input type="time" id="input-end"></label>
+            <label>Categoria
+              <select id="input-category">
+                <option value="study">Studio</option>
+                <option value="work">Lavoro</option>
+                <option value="sport">Sport</option>
+                <option value="creativity">Creatività</option>
+                <option value="freetime">Tempo Libero</option>
+                <option value="meal">Pasto</option>
+                <option value="health">Salute</option>
+                <option value="rest">Riposo</option>
+              </select>
+            </label>
+            <div class="form-actions">
+                <button id="duplicate-btn" hidden>Duplica</button>
+                <button id="delete-btn" hidden>Elimina</button>
+                <button id="cancel-btn">Annulla</button>
+                <button id="save-btn">Salva</button>
+            </div>
+        </div>
+    </div>
+    <div id="settings-overlay" hidden>
+        <div id="settings-panel">
+            <h2>Colori Categorie</h2>
+            <label>Studio <input type="color" id="color-study" value="#4a7c9e"></label>
+            <label>Lavoro <input type="color" id="color-work" value="#5a6b7d"></label>
+            <label>Sport <input type="color" id="color-sport" value="#3d7a5a"></label>
+            <label>Creatività <input type="color" id="color-creativity" value="#8a6d9e"></label>
+            <label>Tempo Libero <input type="color" id="color-freetime" value="#c47a3e"></label>
+            <label>Pasto <input type="color" id="color-meal" value="#b0b0b0"></label>
+            <label>Salute <input type="color" id="color-health" value="#a04a4a"></label>
+            <label>Riposo <input type="color" id="color-rest" value="#9a9a9a"></label>
+            <div class="form-actions">
+                <button id="settings-cancel-btn">Annulla</button>
+                <button id="settings-save-btn">Salva</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
