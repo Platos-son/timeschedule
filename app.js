@@ -1,4 +1,5 @@
 let editingIndex = null;
+let justDuplicated = false;
 let GRID_START_HOUR = 7;
 let lastKnownDay = new Date().getDay();
 const overlay = document.getElementById('form-overlay');
@@ -168,7 +169,12 @@ function openEditForm(index) {
   editingIndex = index;
   overlay.hidden = false;
   document.getElementById('delete-btn').hidden = false;
-  document.getElementById('duplicate-btn').hidden = false;
+  if (justDuplicated) {
+    document.getElementById('duplicate-btn').hidden = true;
+    justDuplicated = false; // Resetta il flag per la prossima volta
+  } else {
+    document.getElementById('duplicate-btn').hidden = false;
+  }
 }
 
 document.getElementById('grid').addEventListener('click', (e) => {
@@ -203,6 +209,7 @@ document.getElementById('duplicate-btn').addEventListener('click', () => {
   overlay.hidden = true;
   localStorage.setItem('activities', JSON.stringify(activities));
   RenderActivities();
+  justDuplicated = true;
   openEditForm(activities.length - 1);
 });
 
