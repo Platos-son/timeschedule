@@ -43,18 +43,28 @@ function ComputeBlockPosition(startString, endString, gridStartHour, hourHeight)
 
 let activities = [];
 
-function UpdateTimers(){
+function UpdateTimers() {
   const now = new Date();
   const currentHour = now.getHours() + now.getMinutes() / 60;
+  const todayIndex = now.getDay();  
+  const daysMap = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  const todayString = daysMap[todayIndex];
   const blocks = document.querySelectorAll('.block');
+  
   blocks.forEach(block => {
-    const startString = block.dataset.start;
-    const startNumber = ConvertTimeString(startString);
-    const endString = block.dataset.end;
-    const endNumber = ConvertTimeString(endString);
     const timerElement = block.querySelector('.timer');
-    
-    if (currentHour < startNumber) { timerElement.textContent = "non cominciato";} 
+    if (!timerElement) return;
+    const parentColumn = block.closest('.day-column');
+    const blockDay = parentColumn.dataset.day;
+    if (blockDay !== todayString) {
+      timerElement.textContent = "";
+      return; 
+    }
+    const startNumber = ConvertTimeString(block.dataset.start);
+    const endNumber = ConvertTimeString(block.dataset.end); 
+    if (currentHour < startNumber) { 
+      timerElement.textContent = "non cominciato";
+    } 
     else if (currentHour >= startNumber && currentHour < endNumber) {
       const timeLeft = endNumber - currentHour;
       const hoursLeft = Math.floor(timeLeft);
@@ -64,9 +74,10 @@ function UpdateTimers(){
       } else {
         timerElement.textContent = `cominciato: ${hoursLeft}h ${minutesLeft}min rimanenti`;
       }
-    } else { timerElement.textContent = "terminato";}
-  });
-}
+    } 
+    else { 
+      timerElement.textContent = "terminato";
+}});}
 
 function RenderActivities() {
   const hourHeight = parseFloat(
