@@ -55,16 +55,15 @@ function RenderActivities() {
   activities.forEach((activity, index) => {
     const column = document.querySelector(`.day-column[data-day="${activity.day}"]`);
     const body = column.querySelector('.day-body');
-
     const block = document.createElement('div');
     block.className = 'block';
     block.classList.add('cat-' + activity.category);
     block.dataset.start = activity.start;
     block.dataset.end = activity.end;
     block.dataset.index = index;
-    block.textContent = activity.name;
+    const duration = (ConvertTimeString(activity.end) - ConvertTimeString(activity.start)) * 60;
+    block.innerHTML = activity.name + '<br>' + duration + " min";
     body.appendChild(block);
-
     const pos = ComputeBlockPosition(activity.start, activity.end, GRID_START_HOUR, hourHeight);
     block.style.top = pos.top + 'px';
     block.style.height = pos.height + 'px';
