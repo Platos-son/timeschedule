@@ -144,10 +144,17 @@ function RenderTimeColumn() {
   }
 }
 
-const saved = localStorage.getItem('activities');
-if (saved !== null) {
-  activities = JSON.parse(saved);
-}
+document.getElementById('mode-btn').addEventListener('click', () => {
+  const gridElement = document.getElementById('grid');
+  if (gridElement.classList.contains('single-day-view')) {
+    gridElement.classList.remove('single-day-view');
+    document.getElementById('mode-btn').textContent = "Giornata";
+  } 
+  else {
+    gridElement.classList.add('single-day-view');
+    document.getElementById('mode-btn').textContent = "Settimana";
+  }
+});
 
 document.getElementById('grid-start-select').addEventListener('change', (e) => {
   GRID_START_HOUR = parseInt(e.target.value, 10);

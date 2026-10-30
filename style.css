@@ -89,6 +89,9 @@ body {
 
 header {
   padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 #add-btn {
@@ -257,7 +260,7 @@ header {
 }
 
 #grid-start-select {
-  margin-left: auto;
+  margin-left: 8px;
 }
 
 .current-time-line {
@@ -299,7 +302,8 @@ header {
 }
 
 #settings-btn {
-  background: #eee;
+  background: #1d1d1f;
+  color: white;
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
@@ -376,4 +380,37 @@ header {
   opacity: 0.9;
   font-weight: 600;
   text-align: right;
+}
+
+#mode-btn {
+  background: #1d1d1f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+#grid.single-day-view {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 0;
+}
+
+#grid.single-day-view .time-column {
+  width: 60px;
+  flex-shrink: 0;
+}
+
+#grid.single-day-view .day-column {
+  display: none;
+  width: calc(100% - 60px);
+  min-height: auto;
+}
+
+#grid.single-day-view .day-column.active {
+  display: flex;
 }
