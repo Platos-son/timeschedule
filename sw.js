@@ -1,4 +1,4 @@
-const CACHE_NAME = 'timeschedule-v2.1.1';
+const CACHE_NAME = 'timeschedule-v2.2.0';
 const ASSETS = [
   './',
   './index.html',
@@ -34,8 +34,15 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
+    caches.match(e.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(e.request).then((networkResponse) => {
+        return networkResponse;
+      }).catch(() => {
+        console.log("Risorsa non trovata e rete assente:", e.request.url);
+      });
     })
   );
 });
