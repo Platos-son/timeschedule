@@ -97,7 +97,7 @@ function RenderActivities() {
     block.dataset.start = activity.start;
     block.dataset.end = activity.end;
     block.dataset.index = index;
-    const duration = (ConvertTimeString(activity.end) - ConvertTimeString(activity.start)) * 60;
+    const duration = Math.round((ConvertTimeString(activity.end) - ConvertTimeString(activity.start)) * 60);    
     block.innerHTML = activity.name + '<br>' + duration + "min";
     const timer = document.createElement('span');
     timer.className = 'timer';
